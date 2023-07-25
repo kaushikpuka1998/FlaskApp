@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import jsonify
+from flask import render_template
 from flask import request
 
 app = Flask(__name__)
@@ -41,6 +42,16 @@ def returnJsonSecond():
         }
 
         return jsonify(data)
+
+
+@app.route("/login")
+def returnJsonLogin():
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def returnJsonLogout():
+    return render_template("logout.html")
 
 
 if __name__ == "__main__":
