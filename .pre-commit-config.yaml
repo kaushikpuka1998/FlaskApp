@@ -11,9 +11,6 @@ repos:
     rev: v3.10.0
     hooks:
       - id: reorder-python-imports
-        name: Reorder Python imports (src, tests)
-        files: "^(?!examples/)"
-        args: ["--application-directories", "src"]
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
