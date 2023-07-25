@@ -46,12 +46,14 @@ def returnJsonSecond():
 
 @app.route("/login")
 def returnJsonLogin():
-    return render_template("login.html")
+    user = "Kaushik"
+    app.logger.info(f"User: { user } Logged in")
+    return render_template("login.html", user="kaushik")
 
 
 @app.route("/logout")
 def returnJsonLogout():
-    return render_template("logout.html")
+    return render_template("logout.html", user="Kaushik")
 
 
 if __name__ == "__main__":
