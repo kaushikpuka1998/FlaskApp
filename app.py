@@ -4,6 +4,7 @@ login and logout blueprints.
 """
 from flask import Flask  # pylint: disable=import-error
 
+import rest  # pylint: disable=import-error
 from login import app_file1  # pylint: disable=import-error
 from logout import app_file2  # pylint: disable=import-error
 from register import app_file3  # pylint: disable=import-error
@@ -13,6 +14,7 @@ app = Flask(__name__)
 app.register_blueprint(app_file1)
 app.register_blueprint(app_file2)
 app.register_blueprint(app_file3)
+app.register_blueprint(rest.app_file4)
 
 # @app.route("/")
 # def home():
