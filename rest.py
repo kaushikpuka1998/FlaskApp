@@ -3,6 +3,7 @@ This module defines the rest-api-details
 """
 from flask import Blueprint  # pylint: disable=import-error
 from flask import Flask  # pylint: disable=import-error
+from flask import jsonify  # pylint: disable=import-error
 from flask_sqlalchemy import SQLAlchemy  # pylint: disable=import-error
 from marshmallow import fields  # pylint: disable=import-error
 from marshmallow import post_load  # pylint: disable=import-error
@@ -20,8 +21,6 @@ rest_controller.config[
 rest_controller.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(rest_controller)
-
-
 """
 This module defines the Recipe model
 """
@@ -43,6 +42,7 @@ class Recipe(db.Model):
     description = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
+        rest_controller.app_context().push()
         return self.name
 
     @classmethod
@@ -56,7 +56,8 @@ class Recipe(db.Model):
         Returns:
             The Recipe object with the given name, or None if not found.
         """
-        return cls.query.filter_by(name=name).first()
+        with rest_controller.app_context():
+            return cls.query.filter_by(name=name).first()
 
     @classmethod
     def find_by_id(cls, _id):
@@ -69,7 +70,8 @@ class Recipe(db.Model):
         Returns:
             The Recipe object with the given ID, or None if not found.
         """
-        return cls.query.get_or_404(_id)
+        with rest_controller.app_context():
+            return cls.query.get_or_404(_id)
 
     @classmethod
     def find_all(cls):
@@ -79,7 +81,8 @@ class Recipe(db.Model):
         Returns:
             A list of all Recipe objects in the database.
         """
-        return cls.query.all()
+        with rest_controller.app_context():
+            return cls.query.all()
 
     def save(self):
         """
@@ -137,3 +140,18 @@ class RecipeSchema(Schema):
             Recipe object.
         """
         return {"id": recipe.id, "name": recipe.name}
+
+
+@app_file4.route("/recipes", methods=["GET"])
+def get_recipes():
+    """
+    Handle the /recipes route.
+
+    Returns:
+        A JSON response containing a list of all recipes.
+    """
+
+    recipes = Recipe.find_all()
+    recipe_schema = RecipeSchema(many=True)
+    data = recipe_schema.dump(recipes)
+    return jsonify({"status": "success", "data": data})
