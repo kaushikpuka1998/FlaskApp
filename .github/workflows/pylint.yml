@@ -9,6 +9,8 @@ jobs:
       matrix:
         python-version: ["3.10"]
     steps:
+    - name: GitHub Action for pylint
+      uses: cclauss/GitHub-Action-for-pylint@0.7.0
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
