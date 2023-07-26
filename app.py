@@ -1,59 +1,54 @@
 from flask import Flask
-from flask import jsonify
-from flask import render_template
-from flask import request
+
+from login import app_file1
+from logout import app_file2
 
 app = Flask(__name__)
 
+app.register_blueprint(app_file1)
+app.register_blueprint(app_file2)
 
-@app.route("/")
-def home():
-    return "Hey Hello from Flask SIde"
-
-
-@app.route("/path_of_response", methods=["GET"])
-def returnJson():
-    if request.method == "GET":
-        data = {
-            "Modules": 15,
-            "Subject": "Data Structures and Algorithms",
-        }
-
-        return jsonify(data)
+# @app.route("/")
+# def home():
+#     return "Hey Hello from Flask SIde"
 
 
-@app.route("/map", methods=["GET"])
-def returnJsonMap():
-    if request.method == "GET":
-        data = {
-            "Modules": 19,
-            "Subject": "Computer Networking",
-        }
+# @app.route("/path_of_response", methods=["GET"])
+# def returnJson():
+#     if request.method == "GET":
+#         data = {
+#             "Modules": 15,
+#             "Subject": "Data Structures and Algorithms",
+#         }
 
-        return jsonify(data)
-
-
-@app.route("/second", methods=["GET"])
-def returnJsonSecond():
-    if request.method == "GET":
-        data = {
-            "Modules": 20,
-            "Subject": "Computer Architechture",
-        }
-
-        return jsonify(data)
+#         return jsonify(data)
 
 
-@app.route("/login")
-def returnJsonLogin():
-    user = "Kaushik"
-    app.logger.info(f"User: { user } Logged in")
-    return render_template("login.html", user="kaushik")
+# @app.route("/map", methods=["GET"])
+# def returnJsonMap():
+#     if request.method == "GET":
+#         data = {
+#             "Modules": 19,
+#             "Subject": "Computer Networking",
+#         }
+
+#         return jsonify(data)
 
 
-@app.route("/logout")
-def returnJsonLogout():
-    return render_template("logout.html", user="Kaushik")
+# @app.route("/second", methods=["GET"])
+# def returnJsonSecond():
+#     if request.method == "GET":
+#         data = {
+#             "Modules": 20,
+#             "Subject": "Computer Architechture",
+#         }
+
+#         return jsonify(data)
+
+
+# @app.route("/logout")
+# def returnJsonLogout():
+#     return render_template("logout.html", user="Kaushik")
 
 
 if __name__ == "__main__":
