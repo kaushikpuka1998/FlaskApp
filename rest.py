@@ -1,11 +1,11 @@
 """
 This module defines the rest-api-details
 """
-from flask import Blueprint
-from flask import Flask
+from flask import Blueprint  # pylint: disable=import-error
+from flask import Flask  # pylint: disable=import-error
 from flask_sqlalchemy import SQLAlchemy  # pylint: disable=import-error
-from marshmallow import fields
-from marshmallow import Schema
+from marshmallow import fields  # pylint: disable=import-error
+from marshmallow import Schema  # pylint: disable=import-error
 
 rest_controller = Flask(__name__)
 app_file4 = Blueprint(
