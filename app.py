@@ -2,10 +2,10 @@
 This module defines the Flask app and registers the
 login and logout blueprints.
 """
-from flask import Flask
+from flask import Flask  # pylint: disable=import-error
 
-from login import app_file1
-from logout import app_file2
+from login import app_file1  # pylint: disable=import-error
+from logout import app_file2  # pylint: disable=import-error
 
 app = Flask(__name__)
 
