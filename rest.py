@@ -4,9 +4,9 @@ This module defines the rest-api-details
 from flask import Blueprint  # pylint: disable=import-error
 from flask import Flask  # pylint: disable=import-error
 from flask_sqlalchemy import SQLAlchemy  # pylint: disable=import-error
-from marshmallow import fields
-from marshmallow import post_load
-from marshmallow import pre_dump
+from marshmallow import fields  # pylint: disable=import-error
+from marshmallow import post_load  # pylint: disable=import-error
+from marshmallow import pre_dump  # pylint: disable=import-error
 from marshmallow import Schema  # pylint: disable=import-error
 
 rest_controller = Flask(__name__)
