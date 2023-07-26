@@ -1,9 +1,9 @@
 """
 This module defines the login blueprint for the Flask app.
 """
-from flask import Blueprint
-from flask import current_app as app
-from flask import render_template
+from flask import Blueprint  # pylint: disable=import-error
+from flask import current_app as app  # pylint: disable=import-error
+from flask import render_template  # pylint: disable=import-error
 
 app_file1 = Blueprint("login", __name__, template_folder="templates")
 
