@@ -1,3 +1,7 @@
+"""
+This module defines the Flask app and registers the
+login and logout blueprints.
+"""
 from flask import Flask
 
 from login import app_file1

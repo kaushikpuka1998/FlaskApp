@@ -22,6 +22,17 @@ repos:
         additional_dependencies:
           - flake8-bugbear
           - flake8-implicit-str-concat
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args:
+          - --max-line-length=80
+          - --ignore-imports=yes
+          - -d duplicate-code
   - repo: https://github.com/peterdemin/pip-compile-multi
     rev: v2.6.3
     hooks:
