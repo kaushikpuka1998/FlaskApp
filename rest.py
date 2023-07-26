@@ -4,7 +4,9 @@ This module defines the rest-api-details
 from flask import Blueprint  # pylint: disable=import-error
 from flask import Flask  # pylint: disable=import-error
 from flask_sqlalchemy import SQLAlchemy  # pylint: disable=import-error
-from marshmallow import fields  # pylint: disable=import-error
+from marshmallow import fields
+from marshmallow import post_load
+from marshmallow import pre_dump
 from marshmallow import Schema  # pylint: disable=import-error
 
 rest_controller = Flask(__name__)
@@ -108,3 +110,30 @@ class RecipeSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str(required=True)
     description = fields.Str(required=True)
+
+    @post_load
+    def make_recipe(self, data):
+        """
+        Create a Recipe object from the validated data.
+
+        Args:
+            data (dict): The validated data.
+
+        Returns:
+            A Recipe object created from the validated data.
+        """
+        return Recipe(**data)
+
+    @pre_dump
+    def prepare_recipe(self, recipe):
+        """
+        Prepare a Recipe object for serialization.
+
+        Args:
+            recipe (Recipe): The Recipe object to prepare.
+
+        Returns:
+            A dictionary containing the serialized
+            Recipe object.
+        """
+        return {"id": recipe.id, "name": recipe.name}
